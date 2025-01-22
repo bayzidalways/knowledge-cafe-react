@@ -1,8 +1,14 @@
 import PropTypes from "prop-types";
 import { IoBookmarkOutline } from "react-icons/io5";
 
-export const AloneBlog = ({ blog, addToBookMarks }) => {
+export const AloneBlog = ({
+  blog,
+  addToBookMarks,
+  handleMarkAsRead,
+  removeFromBookMarks,
+}) => {
   const {
+    id,
     title,
     cover,
     author_img,
@@ -31,7 +37,10 @@ export const AloneBlog = ({ blog, addToBookMarks }) => {
         </div>
         <div className=" flex items-center">
           <span className="text-sm text-gray-500">{reading_time} min read</span>
-          <button className="text-xl ml-2" onClick={() => addToBookMarks(blog)}>
+          <button
+            className="text-xl ml-2 text-gray-800 hover:text-red-500 active:text-red-500 focus:outline-none"
+            onClick={() => addToBookMarks(blog)}
+          >
             <IoBookmarkOutline />
           </button>
         </div>
@@ -46,6 +55,12 @@ export const AloneBlog = ({ blog, addToBookMarks }) => {
           </span>
         ))}
       </div>
+      <button
+        className="text-purple-800 text-xl font-medium underline"
+        onClick={() => handleMarkAsRead(id, reading_time)}
+      >
+        Mark as Read
+      </button>
     </div>
   );
 };
@@ -53,4 +68,6 @@ export const AloneBlog = ({ blog, addToBookMarks }) => {
 AloneBlog.propTypes = {
   blog: PropTypes.object.isRequired,
   addToBookMarks: PropTypes.func,
+  handleMarkAsRead: PropTypes.func,
+  removeFromBookMarks: PropTypes.element,
 };
